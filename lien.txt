@@ -1,0 +1,9 @@
+https://montpellier-fr-smoove.klervi.net/gbfs/en/system_information.json
+https://montpellier-fr-smoove.klervi.net/gbfs/en/station_information.json
+https://montpellier-fr-smoove.klervi.net/gbfs/en/station_status.json 
+import json 
+import requests 
+data = json.loads(json_str.text)	
+           
+print(data)
+
