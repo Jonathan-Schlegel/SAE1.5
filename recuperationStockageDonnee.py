@@ -10,7 +10,7 @@ listStationID={'001': 'Rue Jules Ferry - Gare Saint-Roch', '002': 'Comédie', '0
 
 
 #Cette fonction n'a pour but que de recolter les données d'un parkin mis en paramètre. 
-def recuperationParkingVoiture(parking):
+def recuperationParkingVoiture(parking,temps):
         response=requests.get(f"https://data.montpellier3m.fr/sites/default/files/ressources/{parking}.xml")
         f=open("response.txt","w",encoding="utf8")
         f.write(response.text)
@@ -22,8 +22,6 @@ def recuperationParkingVoiture(parking):
         #Place total
         for user in tree.xpath("Total"):
             placeTotal=user.text
-        #On récupère le temps seconde epoch
-        temps=time.time()
         donnees=[temps,placeLibre,placeTotal]
         #Retourne une liste contant des strings du temps en seconde "epoch", des places libres ainsi
         #que la place total
@@ -49,7 +47,7 @@ def recuperationParkingVelo():
 #Fonction qui prend en paramètre la liste de liste vélo ou voiture
 def ecritureDonneeVelo(liste):
     #Dans le fichier du dossier parkings on écrit la liste de liste
-    with open("parkings/velo.csv","a",newline="") as fichier:
+    with open("parkings/parkings_velo/velo.csv","a",newline="") as fichier:
         ecriture= csv.writer(fichier,delimiter=",")
         #On l'écrit sur une ligne
         ecriture.writerow(liste)
@@ -57,9 +55,7 @@ def ecritureDonneeVelo(liste):
 
 
 def ecritureDonneeVoiture(liste,parking):
-    fichier=open(f"parkings/{parking}.csv","a",newline="")
+    fichier=open(f"parkings/parkings_voiture/{parking}.csv","a",newline="")
     ecriture=csv.writer(fichier,delimiter=",")
     ecriture.writerow(liste)
     fichier.close()
-
-recuperationParkingVoiture("FR_MTP_GARE")
