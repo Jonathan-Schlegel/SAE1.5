@@ -29,7 +29,7 @@ def recuperationParkingVoiture(parking,temps):
 
 
 #Fonction récupérant les informations des stations vélomagg du site
-def recuperationParkingVelo():
+def recuperationParkingVelo(temps):
     #Liste contenant les listes des différentes stations qui seront ajoutées  
     listeDeListe=[]
     response=requests.get("https://montpellier-fr-smoove.klervi.net/gbfs/en/station_status.json")
@@ -40,6 +40,7 @@ def recuperationParkingVelo():
         veloEmprunte=data["data"]["stations"][x]["num_docks_available"]
         #Ajout d'une liste d'une station contenant ses véldata["data"]["stations"][station]["num_bikes_available"]os disponibles et ses vélos empruntés
         listeDeListe.append([veloLibre,veloEmprunte])
+    listeDeListe.append(temps)
     return listeDeListe
     #Retourne une liste de liste sous la forme [[veloLibre0,veloEmprunte0],[veloLibre1,veloEmprunte1]]
 

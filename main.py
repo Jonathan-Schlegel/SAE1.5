@@ -10,14 +10,14 @@ def lancement(heure,echantillonnage):
     for x in range(round((heure*60)/echantillonnage)):
         temps=int(time.time())
         for parking in parkings:
-            liste=recuperationParkingVoiture(parking)
-            liste.append(temps)
+            liste=recuperationParkingVoiture(parking,temps)
             ecritureDonneeVoiture(liste,parking)
         liste=recuperationParkingVelo(temps)
         print(liste)
         ecritureDonneeVelo(liste)
         time.sleep(echantillonnage*60)
 
+lancement(24,5)
 """donneeVelo=lectureDonneeVelo()"""
 
 
