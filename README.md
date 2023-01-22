@@ -1,2 +1,2 @@
 # SAE1.5
-Données
+Ce projet a pour vocation de nous améliorer dans la compétence de programmation.
