@@ -1,4 +1,5 @@
-#Module fonctions récupération de donnée pour stockage vers fichiers
+#Module fonctions récupération de donnée venant de fichier local ou distant
+#pour stockage vers fichiers
 import requests
 from lxml import etree
 import json
@@ -67,3 +68,24 @@ def ecritureDonneeVoiture(liste,parking):
     ecriture=csv.writer(fichier,delimiter=",")
     ecriture.writerow(liste)
     fichier.close()
+
+def lectureEcritureFichier(parking):
+    with open(f"data/txt_file/voiture/{parking}_time_occupation.txt") as fichier:
+        lecture=fichier.readlines()
+        fichier.close()
+    with open(f"data/txt_file/voiture/{parking}_v2.txt","w") as fichier:
+        for ligne in lecture:
+            ligne=ligne.split()
+            pourcentage=float(ligne[2])
+            pourcentage=round(pourcentage)
+            fichier.write(f'{ligne[1][:5]},{pourcentage}\n')
+        fichier.close()
+
+
+def lectureEcritureFichier9(parking):
+    with open(f"data/txt_file/voiture/{parking}_time_occupation.txt") as fichier:
+        lecture=fichier.readlines()
+        donnee=lecture[8]
+        donnee=donnee.split()
+        print(donnee[2])
+        fichier.close()
